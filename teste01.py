@@ -1,6 +1,4 @@
 
-<<<<<<< Updated upstream
-=======
 ## CONTROLE DE USUARIO ##
 
 usuario = int(input("Selecione O Nivel De Acesso (USUARIO = 1) ou (ADMINISTRADOR = 0)  :"))
@@ -13,19 +11,40 @@ if usuario == 0:
         if usuario == 0:
             senha = int(input("Digite A Senha: "))
 
->>>>>>> Stashed changes
 ## BANCO DE DADOS DE TROCO ##
 
 moeda5 = 5
+valorMoeda5 = 0.05 * 5
+
 moeda10 = 5
+valorMoeda10 = 0.10 * 5
+
 moeda25 = 5 
+valorMoeda25 = 0.25 * 5
+
 moeda50 = 5 
+valorMoeda50 = 0.50 * 5
+
 moeda01 = 5
+valorMoeda1 = 1 * 5
+
 
 nota2 = 10
+valorNota2 = 2 * 10
+
 nota5 = 5
+valorNota5 = 5 * 15
+
 nota10 = 3
+valorNota10 = 10 * 3
+
 nota20 = 2
+valorNota20 = 20 * 2
+
+valorMoedas = valorMoeda5 + valorMoeda25 + valorMoeda10 + valorMoeda1 + valorMoeda50 
+valorNotas = valorNota2 + valorNota5 + valorNota10 + valorNota20
+
+valorTrocoTotal = valorMoedas + valorNotas
 
 ## CONTROLE DE USUARIO ##
 
@@ -69,6 +88,3 @@ else:
         print("O valor do troco é R$", troco)
     else:
         print("Compra confirmada, retire seu refrigerante")
-
-
-
