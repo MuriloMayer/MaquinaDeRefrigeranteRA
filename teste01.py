@@ -1,4 +1,19 @@
 
+<<<<<<< Updated upstream
+=======
+## CONTROLE DE USUARIO ##
+
+usuario = int(input("Selecione O Nivel De Acesso (USUARIO = 1) ou (ADMINISTRADOR = 0)  :"))
+
+if usuario == 0:
+    senha = int(input("Digite A Senha: "))
+    while senha != 12345 :
+        print("Senha Incorreta")
+        usuario = int(input("Selecione O Nivel De Acesso (USUARIO = 1) ou (ADMINISTRADOR = 0)  :"))
+        if usuario == 0:
+            senha = int(input("Digite A Senha: "))
+
+>>>>>>> Stashed changes
 ## BANCO DE DADOS DE TROCO ##
 
 moeda5 = 5
