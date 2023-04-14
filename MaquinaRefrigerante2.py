@@ -93,7 +93,7 @@ if usuario == 0 :
 
     elif funcao == 0 :
         print(f"Moeda 5¢ = {moeda5}\nMoeda 10¢ = {moeda10}\nMoeda 25¢ = {moeda25}\nMoeda 50¢ = {moeda50}\nMoeda 1$ = {moeda01}\n")
-        print(f"Nota 2$ = {nota2}\n Nota 5$ = {nota5}\n Nota 10$= {nota10}\n Nota 20$ = {nota20}\n")
+        print(f"Nota 2$ = {nota2}\n Nota 5$ = {nota5}\n Nota 10$= {nota10}\n ")
         print(f"Valor Total De Moedas {valorMoedas}$\n Valor Total De Cedulas {valorNotas}$\nValor Total {valorTrocoTotal}$")
 
 
@@ -117,12 +117,54 @@ if usuario == 1 :
 ## TROCO ##
 
     troco = valorPago - valorFinal
+    print("Seu Troco É De:")
+    valor10 = int(troco // 10)
+    if valor10 > 0 :
+        if valor10 > 1 :
+            print(f"{valor10} Notas De R$10")
+        else: 
+            print(f"{valor10} Notas De R$10")
+    troco -= valor10 * 10
 
-    contM5 = 0
-    contM25 = 0 
-    contM01 = 0
-    contC2 = 0
-    contC5 = 0
-    contC10 = 0
+    valor5 = int(troco // 5)
+    if valor5 > 0 :
+        if valor5 > 1 :
+            print(f"{valor5} Notas De R$5")
+        else: 
+            print(f"{valor5} Notas De R$5")
+    troco -= valor5 * 5
 
-    
+    valor2 = int(troco // 2)
+    if valor2 > 0 :
+        if valor2 > 1 :
+            print(f"{valor2} Notas De R$2")
+        else: 
+            print(f"{valor2} Notas De R$2")
+    troco -= valor2 * 2
+
+    valorM5 = int(troco // 0.5)
+    if valorM5  > 0 :
+        if valorM5 > 1 :
+            print(f"{valorM5} Moedas De ¢0.5")
+        else: 
+            print(f"{valorM5} Moeda De ¢0.5")
+    troco -= valorM5 * 0.5
+  
+    valorM25 = int(troco // 0.25)
+    if valorM25  > 0 :
+        if valorM25 > 1 :
+            print(f"{valorM25} Moedas De ¢0.25")
+        else: 
+            print(f"{valorM25} Moedas De ¢0.25")
+    troco -= valorM25 * 0.25
+
+    valorM01 = troco // 1
+    if valorM01  > 0 :
+        if valorM01 > 1 :
+            print(f"{valorM01} Moedas De ¢1.0")
+        else: 
+            print(f"{valorM01} Moedas De ¢1.0")
+    troco -= valorM01 * 1.0
+
+
+
