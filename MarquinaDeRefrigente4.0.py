@@ -1,12 +1,25 @@
-
 from decimal import Decimal
+
+def calcular_troco(valor_troco, nota):
+    valor = int(valor_troco / nota)
+    if valor > 0:
+        if valor > 1:
+            print(f'{valor} - {nota} $')
+        else:
+            print(f'{valor} - {nota} $')
+    valor_troco -= valor * nota
+    return valor_troco
+
+def gerar_codigo_pix(chave_pix, valor, nome_recebedor, cidade_recebedor):
+    dados_pix = f"SPD*1.0*{chave_pix}*{nome_recebedor}*{cidade_recebedor}**{valor}**"
+    return dados_pix
 
 
 ## CONTROLE DE USUARIO ##
 
 print("Bem-Vindo A Maquina Do Blaze Refris")
-usuario = int(input("Selecione O Nivel De Acesso (CONSUMIDOR = 1) ou (ADMINISTRADOR = 0)  \n:"))
-while usuario != 0 and usuario != 1 :
+usuario = int(input("Selecione O Nivel De Acesso (CONSUMIDOR = 1) ou (ADMINISTRADOR = 0)\nSe Desejar Sair, Digite (3)  \n:"))
+while usuario != 0 and usuario != 1 or usuario == 3:
     usuario = int(input("Selecione O Nivel De Acesso (CONSUMIDOR = 1) ou (ADMINISTRADOR = 0)  \n:"))
 
 if usuario == 0:
@@ -116,102 +129,77 @@ if usuario == 1 :
         qtd_refri = int(input("Selecione a quantidade de refrigerantes você deseja: "))
     valor_final = qtd_refri * preco_refri
     print("O preço final é R$", valor_final)
-
+    pagamento = int(input("Se Desejar Pagar Com PIX Digite (1)\nSe Desejar Pagar Com Dinheiro Digite (2)"))
     valor_pago = 0
-    print("Só aceitamos notas de 2, 5 e 10")
-    print("Só aceitamos moedas de 0.05, 0.25 e 1 real")
+    print("Aceitamos\nNotas De 2, 5 e 10\nMoedas De 0.05, 0.25, e 1 Real")
 
     # while valor_pago < valor_final :
     #     print(f"Valor insuficiente, o preço final é de {valor_final}")
     #     valor_pago = valor_pago + float(input("Insira o pagamento restante"))
 
-
     notas_inseridas = 1
 
-    while valor_pago < valor_final:
-        nota_inserida = Decimal(input(f'Insira o valor da {notas_inseridas} nota ou moeda (Se for moeda, inserir o número com o decimal, por exemplo: 0.50): '))
 
-        while nota_inserida == 20 or nota_inserida == 50 or nota_inserida == 50 or nota_inserida == 100 or nota_inserida == 200:
-            print("Não trabalhamos com esse valor")
+    if pagamento == 2 :
+        while valor_pago < valor_final:
             nota_inserida = Decimal(input(f'Insira o valor da {notas_inseridas} nota ou moeda (Se for moeda, inserir o número com o decimal, por exemplo: 0.50): '))
 
-        if nota_inserida == 2:
-            nota2 += 1
-        elif nota_inserida == 5:
-            nota5 +=1 
-        elif nota_inserida == 10:
-            nota10 +=1 
-        elif nota_inserida == 0.05:
-            moeda5 +=1 
-        elif nota_inserida == 0.10:
-            moeda10 +=1 
-        elif nota_inserida == 0.25:
-            moeda25 +=1 
-        elif nota_inserida == 0.50:
-            moeda50 +=1 
-        elif nota_inserida == 1:
-            moeda01 +=1 
+            while nota_inserida == 20 or nota_inserida == 50 or nota_inserida == 50 or nota_inserida == 100 or nota_inserida == 200:
+                print("Não trabalhamos com esse valor")
+                nota_inserida = Decimal(input(f'Insira o valor da {notas_inseridas} nota ou moeda (Se for moeda, inserir o número com o decimal, por exemplo: 0.50): '))
+
+            if nota_inserida == 2:
+                nota2 += 1
+            elif nota_inserida == 5:
+                nota5 +=1 
+            elif nota_inserida == 10:
+                nota10 +=1 
+            elif nota_inserida == 0.05:
+                moeda5 +=1 
+            elif nota_inserida == 0.10:
+                moeda10 +=1 
+            elif nota_inserida == 0.25:
+                moeda25 +=1 
+            elif nota_inserida == 0.50:
+                moeda50 +=1 
+            elif nota_inserida == 1:
+                moeda01 +=1 
     
-        notas_inseridas += 1
-        valor_pago = valor_pago + nota_inserida
+            notas_inseridas += 1
+            valor_pago = valor_pago + nota_inserida
     
 
 ## TROCO ##
 
 
-    troco = float(valor_pago - valor_final)
-    if troco == 0: 
-        print("Compra Finalizada, Blaze Refris Agradece A Preferencia")
-
-    valor10 = int(troco / 10)
-    if valor10 > 0 :
-        if valor10 > 1 :
-            print(f"{valor10} Notas De R$10")
+        troco = float(valor_pago - valor_final)
+        if troco == 0: 
+            print("Compra Finalizada, Blaze Refris Agradece A Preferencia")
         else: 
-            print(f"{valor10} Notas De R$10")
-    troco -= valor10 * 10
+            troco = calcular_troco(troco, 10)
+            troco = calcular_troco(troco, 5)
+            troco = calcular_troco(troco, 2)
+            troco = calcular_troco(troco, 1)
+            troco = calcular_troco(troco, 0.25)
+            troco = calcular_troco(troco, 0.1)
 
-    valor5 = int(troco / 5)
-    if valor5 > 0 :
-        if valor5 > 1 :
-            print(f"{valor5} Notas De R$5")
-        else: 
-            print(f"{valor5} Notas De R$5")
-    troco -= valor5 * 5
+## PIX ##
 
-    valor2 = int(troco / 2)
-    if valor2 > 0 :
-        if valor2 > 1 :
-            print(f"{valor2} Notas De R$2")
-        else: 
-            print(f"{valor2} Notas De R$2")
-    troco -= valor2 * 2
+    elif pagamento == 1 :
+        print("Pagamento Em Pix Selecionado.")
+
+        chave_pix = "123123123123"
+        valor = valor_final
+        nome_recebedor = "BlazeRefrigerante"
+        cidade_recebedor = "Curitiba/Pr"
 
 
+        codigo_pix = gerar_codigo_pix(chave_pix, valor, nome_recebedor, cidade_recebedor)
+        print(codigo_pix,"\nEfetue O Pagamento Com A Chave Acima")
 
-    valorM01 = int(troco / 1)
-    if valorM01  > 0 :
-        if valorM01 > 1 :
-            print(f"{valorM01} Moedas De ¢1.0")
-        else: 
-            print(f"{valorM01} Moedas De ¢1.0")
-    troco -= valorM01 * 1.0
-  
-
-    valorM25 = int(troco / 0.25)
-    if valorM25  > 0 :
-        if valorM25 > 1 :
-            print(f"{valorM25} Moedas De ¢0.25")
-        else: 
-            print(f"{valorM25} Moedas De ¢0.25")
-    troco -= valorM25 * 0.25
-
-    valorM5 = float(round(troco / 0.05))
-    if valorM5  > 0 :
-        if valorM5 > 1 :
-            print(f"{valorM5} Moedas De ¢0.05")
-        else: 
-            print(f"{valorM5} Moeda De ¢0.05")
+        telefone = input("Digite O Seu Telefone No Formato (+55 DDD 9999-9999)")
 
 
+## Matriz Dados Pix ##
 
+    

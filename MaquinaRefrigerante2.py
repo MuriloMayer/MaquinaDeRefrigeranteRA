@@ -1,15 +1,23 @@
+
+from decimal import Decimal
+
 ## CONTROLE DE USUARIO ##
 print("Bem-Vindo A Maquina Do Blaze Refris")
 usuario = int(input("Selecione O Nivel De Acesso (CONSUMIDOR = 1) ou (ADMINISTRADOR = 0)  \n:"))
+while usuario != 0 and usuario != 1 :
+    usuario = int(input("Selecione O Nivel De Acesso (CONSUMIDOR = 1) ou (ADMINISTRADOR = 0)  \n:"))
 
 if usuario == 0:
     senha = int(input("Digite A Senha: "))
-    while senha != 123 :
-        usuario = int(input("Selecione O Nivel De Acesso (CONSUMIDOR = 1) ou (ADMINISTRADOR = 0)  \n:"))
+    while senha != 123 or usuario == 1:
         print("Senha Incorreta")
-        usuario = int(input("Selecione O Nivel De Acesso (CONSUMIDOR = 1) ou (ADMINISTRADOR = 0)  :"))
-        if usuario == 0:
-            senha = int(input("Digite A Senha: "))
+        usuario = int(input("Selecione O Nivel De Acesso (CONSUMIDOR = 1) ou (ADMINISTRADOR = 0)  \n:"))
+        if usuario == 0 :
+            senha = int(input("Digite A Senha:"))
+        elif usuario == 1 :
+            break
+
+
 
 
 ## BANCO DE DADOS ## 
@@ -51,7 +59,10 @@ valorTrocoTotal = valorMoedas + valorNotas
 
 ## ADMINISTRADOR ##
 
-if usuario == 0 :    
+
+if usuario == 0 :
+=======
+
     funcao = int(input("Para Verificar A Quantidade De Troco, Digite ( 0 ).\nPara Adicionar/Atualizar A Quantidade De Alguma Cedula Ou Moeda, Digite ( 1 ) \nPara Adicionar/Atualizar A Quantidade De Bebidas Digite ( 2 ) \n: "))
     while funcao != 0 and funcao != 1 and funcao != 2:
         print("Função Invalida")
@@ -103,21 +114,25 @@ if usuario == 0 :
 
 if usuario == 1 :
     qtdRefri = int(input("Selecione a quantidade de refrigerantes você deseja: "))
-    while qtdRefri > quantBebidas :
+
+    while qtdRefri > quantBebidas or qtdRefri <= 0:
+
         print(f"Temos Somente {quantBebidas} Em Estoque")
         qtdRefri = int(input("Selecione a quantidade de refrigerantes você deseja: "))
     valorFinal = qtdRefri * precoRefri
     print("O preço final é R$", valorFinal)
 
-    valorPago = float(input("Insira o valor a ser pago: "))
+
+    valorPago = Decimal(input("Insira o valor a ser pago: "))
     while valorPago < valorFinal :
         print(f"Valor Insuficiente, O Preco Final é De {valorFinal}")
-        valorPago = valorPago + float(input("Insira O Pagamento Restante"))
+        valorPago = valorPago + Decimal(input("Insira O Pagamento Restante"))
 
 ## TROCO ##
 
-    troco = valorPago - valorFinal
-    print("Seu Troco É De:")
+    troco = float(valorPago - valorFinal)
+    print(f"Seu Troco É De: {troco}")
+
     valor10 = int(troco // 10)
     if valor10 > 0 :
         if valor10 > 1 :
@@ -142,21 +157,8 @@ if usuario == 1 :
             print(f"{valor2} Notas De R$2")
     troco -= valor2 * 2
 
-    valorM5 = int(troco // 0.5)
-    if valorM5  > 0 :
-        if valorM5 > 1 :
-            print(f"{valorM5} Moedas De ¢0.5")
-        else: 
-            print(f"{valorM5} Moeda De ¢0.5")
-    troco -= valorM5 * 0.5
-  
-    valorM25 = int(troco // 0.25)
-    if valorM25  > 0 :
-        if valorM25 > 1 :
-            print(f"{valorM25} Moedas De ¢0.25")
-        else: 
-            print(f"{valorM25} Moedas De ¢0.25")
-    troco -= valorM25 * 0.25
+
+
 
     valorM01 = troco // 1
     if valorM01  > 0 :
@@ -166,5 +168,21 @@ if usuario == 1 :
             print(f"{valorM01} Moedas De ¢1.0")
     troco -= valorM01 * 1.0
 
+    valorM25 = int(troco // 0.25)
+    if valorM25  > 0 :
+        if valorM25 > 1 :
+            print(f"{valorM25} Moedas De ¢0.25")
+        else: 
+            print(f"{valorM25} Moedas De ¢0.25")
+    troco -= valorM25 * 0.25
+
+
+    valorM5 = int(troco // 0.05)
+    if valorM5  > 0 :
+        if valorM5 > 1 :
+            print(f"{valorM5} Moedas De ¢0.05")
+        else: 
+            print(f"{valorM5} Moeda De ¢0.05")
+    troco -= valorM5 * 0.05
 
 
